@@ -10,14 +10,15 @@
 <body>
     <h1>{{$title ?? ''}}</h1>
     <a href="{{url('belajar')}}">Kembali</a>
-    <form action="" method="post">
+    <form action="{{route('update.tambahan', $count->id)}}" method="post">
         @csrf
+        @method('PUT')
         <input type="hidden" name="jenis" value="tambah">
         <label for="">Angka 1</label>
-        <input type="text" name="angka1" placeholder="Masukkan Angka" required>
+        <input type="text" name="angka1" placeholder="Masukkan Angka" value="{{$count->angka1}}">
         <br>
         <label for="">Angka 2</label>
-        <input type="text" name="angka2" placeholder="Masukkan Angka" required>
+        <input type="text" name="angka2" placeholder="Masukkan Angka" value="{{$count->angka2}}">
         <br>
         <button type="submit">Simpan</button>
     </form>

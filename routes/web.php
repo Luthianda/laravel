@@ -14,10 +14,12 @@ Route::get('/', function () {
 
 Route::get('belajar', [App\Http\Controllers\BelajarController::class, 'index']);
 Route::get('tambah', [App\Http\Controllers\BelajarController::class, 'tambah'])->name('tambah');
-Route::get('edit/data-hitung/{jenis}/{id}', [App\Http\Controllers\BelajarController::class, 'editDataHitung'])->name('edit.data-hitung');
+Route::get('edit/data-hitung/{id}', [App\Http\Controllers\BelajarController::class, 'editDataHitung'])->name('edit.data-hitung');
+Route::put('update/tambahan/{id}', [App\Http\Controllers\BelajarController::class, 'updateTambahan'])->name('update.tambahan');
+Route::delete('softDelete/data-hitung/{id}', [App\Http\Controllers\BelajarController::class, 'softDeleteTambahan'])->name('softDelete.data-hitung');
 
 // Table Counts
-Route::get('data/hitungan', [App\Http\Controllers\BelajarController::class, 'viewHitungan']);
+Route::get('data/hitungan', [App\Http\Controllers\BelajarController::class, 'viewHitungan'])->name('data-hitungan');
 
 Route::get('duar/{id}', [App\Http\Controllers\BelajarController::class, 'update']);
 Route::get('edit', [App\Http\Controllers\BelajarController::class, 'nuall']);

@@ -58,13 +58,59 @@ class BelajarController extends Controller
         return view('data-hitungan', compact('counts'));
     }
 
-    public function editDataHitung(Request $request, string $jenis, string $id)
+    public function editDataHitung(string $id)
     {
-        $title = "Edit Penambahan";
+
+        $title = null;
         $error = null;
         $jumlah = null;
 
-        return view('tambah.edit', compact('title'));
+        // SELECT * FROM counts WHERE id = $id
+        $count = Count::findOrFail($id);
+        $jenis = $count->jenis;
+
+        if ($jenis == "tambah") {
+            $title = "Edit Penambahan";
+            if (!is_numeric($count->angka1) || !is_numeric($count->angka2)) {
+                $error = "Input Harus Numeric";
+            } else {
+                $jumlah = $count->angka1 + $count->angka2;
+            }
+
+            return view('tambah.edit', compact('title', 'error', 'jumlah', 'count'));
+        }
+    }
+
+    public function updateTambahan(Request $request, string $id)
+    {
+        $angka1 = $request->angka1;
+        $angka2 = $request->angka2;
+
+        $count = $angka1 + $angka2;
+
+        // SELECT * FROM counts WHERE id = $id
+        // Update FROM counts SET..... WHERE id = $id
+        $data = $count = Count::findOrFail($id);
+        $data->jenis = $request->jenis;
+        $data->angka1 = $angka1;
+        $data->angka2 = $angka2;
+        $data->hasil = $count;
+        $data->save();
+
+        return redirect()->route('edit.data-hitung', $id)->with(['status' => 'Data Berhasil di Update']);
+        // Count::Update([
+        //     'jenis' => $request->jenis
+        //     'angka1' => $request->angka1...dst
+        // ]) jika pakai cara ini, tidak perlu tulis $data->save() karena itu sudah langsung save
+
+    }
+
+    public function softDeleteTambahan(string $id)
+    {
+        $sDel = Count::FindOrFail($id);
+        $sDel->delete();
+
+        return redirect()->route('data-hitungan', $id)->with(['status' => 'Data Dihapus Sementara']);
     }
 
     public function update($name)

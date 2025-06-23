@@ -26,11 +26,11 @@
             <td>{{ $c->angka2 }}</td>
             <td>{{ $c->hasil }}</td>
             <td>
-                <a href="{{route('edit.data-hitung', ['jenis'=> $c->jenis, 'id'=> $c->id])}}">Edit</a>
-                <form action="" method="post">
+                <a href="{{route('edit.data-hitung', $c->id)}}">Edit</a>
+                <form action="{{route('softDelete.data-hitung', $c->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit" onclick="return confirm('Hapus Sementara?')">Delete</button>
                 </form>
             </td>
         </tr>
