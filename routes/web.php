@@ -3,10 +3,30 @@
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\BelajarController;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
+// (/): default route
+Route::get('/', [App\Http\Controllers\LoginController::class, 'login']);
+Route::get('login', [App\Http\Controllers\LoginController::class, 'login'])->name('login');
+Route::post('actionLogin', [App\Http\Controllers\LoginController::class, 'actionLogin'])->name('actionLogin');
+Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+    Route::get('service', [App\Http\Controllers\DashboardController::class, 'indexService']);
+    Route::get('insert/service', [App\Http\Controllers\DashboardController::class, 'showInsService']);
+});
+
+// bisa juga jika tidak pakai group tapi hanya bisa satu-satu dan akan terlalu banyak jika route yg ingin di setting ada banyak
+// Route::resource('dashboard', App\Http\Controllers\DashboardController::class)->middleware(['auth']);
+
+// resource: untuk mengatur semua kebutuhan route
 // get: hanya bisa melihat dan membaca
 // post: tambah dan ubah data (form)
 // put: ubah data (form)

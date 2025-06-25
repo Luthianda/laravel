@@ -123,4 +123,5 @@ class BelajarController extends Controller
         return "Nuall";
     }
 
+    
 }
