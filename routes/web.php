@@ -19,8 +19,10 @@ Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->n
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
-    Route::get('service', [App\Http\Controllers\DashboardController::class, 'indexService']);
-    Route::get('insert/service', [App\Http\Controllers\DashboardController::class, 'showInsService']);
+    Route::resource('level', App\Http\Controllers\LevelController::class);
+    Route::resource('service', App\Http\Controllers\ServiceController::class);
+    Route::resource('customer', App\Http\Controllers\CustomerController::class);
+    // Route::get('insert/service', [App\Http\Controllers\DashboardController::class, 'showInsService']);
 });
 
 // bisa juga jika tidak pakai group tapi hanya bisa satu-satu dan akan terlalu banyak jika route yg ingin di setting ada banyak

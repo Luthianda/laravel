@@ -16,7 +16,17 @@
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{url('service')}}">
-              <i class="bi bi-circle"></i><span>Services</span>
+              <i class="bi bi-circle"></i><span>Servis</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('level.index')}}">
+              <i class="bi bi-circle"></i><span>Level</span>
+            </a>
+          </li>
+        <li>
+            <a href="{{route('customer.index')}}">
+              <i class="bi bi-circle"></i><span>Pelanggan</span>
             </a>
           </li>
           {{-- <li>
