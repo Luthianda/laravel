@@ -15,7 +15,7 @@ class LevelController extends Controller
     {
         // $datas = Levels::all();
         $datas = Levels::orderBy('id', 'desc')->get();
-        $title = "Data Level";
+        $title = "Data Tingkatan";
         return view('level.index', compact('datas', 'title'));
     }
 
@@ -24,7 +24,7 @@ class LevelController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Level";
+        $title = "Tambah Tingkatan";
         return view('level.create', compact('title'));
     }
 
@@ -50,7 +50,7 @@ class LevelController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Ubah Level";
+        $title = "Ubah Tingkatan";
         $level = Levels::find($id);
         // untuk blank^
         return view('level.edit', compact('level', 'title'));

@@ -12,7 +12,7 @@
                         <input type="text" placeholder="Masukkan Nama Level" class="form-control" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary" type="submit">Simpan</button>
+                        <button class="btn btn-primary" type="submit">Buat</button>
                     </div>
                 </form>
             </div>

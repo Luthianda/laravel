@@ -15,7 +15,7 @@ class ServiceController extends Controller
     {
         // $datas = TypeOfServices::all();
         $datas = TypeOfServices::orderBy('id', 'desc')->get();
-        $title = "Data service";
+        $title = "Data Servis";
         return view('service.index', compact('datas', 'title'));
     }
 
@@ -24,7 +24,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Service";
+        $title = "Tambah Servis";
         return view('service.create', compact('title'));
     }
 
@@ -50,7 +50,7 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Ubah Service";
+        $title = "Ubah Servis";
         $service = TypeOfServices::find($id);
         // untuk blank^
         return view('service.edit', compact('edit', 'title'));

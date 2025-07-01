@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('level', App\Http\Controllers\LevelController::class);
     Route::resource('service', App\Http\Controllers\ServiceController::class);
     Route::resource('customer', App\Http\Controllers\CustomerController::class);
+    Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::resource('trans', App\Http\Controllers\TransOrderController::class);
     // Route::get('insert/service', [App\Http\Controllers\DashboardController::class, 'showInsService']);
 });
 

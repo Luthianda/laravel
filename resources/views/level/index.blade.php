@@ -22,11 +22,11 @@
                             <td>{{$index += 1}}</td>
                             <td>{{$data->name}}</td>
                             <td>
-                                <a href="{{route('level.edit', $data->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{route('level.edit', $data->id)}}" class="btn btn-warning btn-sm">Ubah</a>
                                 <form class="d-inline" action="{{route('level.destroy', $data->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit">Hapus</button>
                                 </form>
                             </td>
                         </tr>
