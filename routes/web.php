@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('customer', App\Http\Controllers\CustomerController::class);
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::resource('trans', App\Http\Controllers\TransOrderController::class);
-    // Route::get('insert/service', [App\Http\Controllers\DashboardController::class, 'showInsService']);
+    Route::get('print_struk/{id}', [App\Http\Controllers\TransOrderController::class, 'printStruk'])->name('print_struk');
 });
 
 // bisa juga jika tidak pakai group tapi hanya bisa satu-satu dan akan terlalu banyak jika route yg ingin di setting ada banyak

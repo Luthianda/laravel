@@ -16,6 +16,11 @@ class TransOrders extends Model
         return $this->belongsTo(Customers::class, 'id_customer', 'id');
     }
 
+    public function details()
+    {
+        return $this->hasMany(TransDetails::class, 'id_trans');
+    }
+
     public function getStatusTextAttribute()
     {
         switch ($this->order_status) {

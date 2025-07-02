@@ -8,12 +8,22 @@ use App\Models\TransDetails;
 use Illuminate\Http\Request;
 use App\Models\TypeOfServices;
 use Illuminate\Support\Carbon;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class TransOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
+
     public function index()
     {
         $title = "Transaksi Order";
@@ -74,7 +84,29 @@ class TransOrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "Detail Transaksi";
+        $details = TransOrders::with(['customer', 'details.service'])->where('id', $id)->first();
+        $params = [
+            'transaction_details' => [
+                'order_id' => rand(),
+                'gross_amount' => 10000,
+            ],
+            'customer_details' => [
+                'first_name' => "Nanda",
+                'last_name' => "Luthfi",
+                'email' => "nanda@gmail.com",
+                'phone' => "084545314654",
+            ],
+            'enable_payment' => [
+                'qris'
+            ],
+
+        ];
+
+
+        // $snapToken = Snap::getSnapToken($params);
+        $snapToken = Snap::createTransaction($params);
+        return view('trans.show', compact('title', 'details', 'snapToken'));
     }
 
     /**
@@ -99,5 +131,13 @@ class TransOrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function printStruk(string $id)
+    {
+        $details = TransOrders::with(['customer', 'details.service'])->where('id', $id)->first();
+        // return $details;
+        // dd($details);
+        return view('trans.print', compact('details'));
     }
 }
