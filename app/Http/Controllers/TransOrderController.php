@@ -122,7 +122,7 @@ class TransOrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //logika yang isinya mengupdate data dari table trans_order
     }
 
     /**
@@ -139,5 +139,27 @@ class TransOrderController extends Controller
         // return $details;
         // dd($details);
         return view('trans.print', compact('details'));
+    }
+
+    public function snap(Request $request, $id)
+    {
+        $order = TransOrders::with(['details', 'customer'])->findOrFail($id);
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => rand(),
+                'gross_amount' => $order->total,
+            ],
+            'customer_details' => [
+                'first_name' => $order->customer->name ?? "Umum",
+                'email' => $order->customer->email ?? "dummy@email.com",
+            ],
+            // 'enabled_payments' => ['qris'],
+        ];
+
+
+        // $snapToken = Snap::getSnapToken($params);
+        $snap = Snap::createTransaction($params);
+        return response()->json(['token' => $snap->token]);
     }
 }
