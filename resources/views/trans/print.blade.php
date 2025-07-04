@@ -109,7 +109,7 @@
         <div class="summary">
             <div class="row">
                 <span>Subtotal</span>
-                <span>Rp {{number_format($detail->total)}}</span>
+                <span>Rp {{number_format($details->total)}}</span>
             </div>
         </div>
         <div class="line">

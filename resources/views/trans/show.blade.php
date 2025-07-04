@@ -56,6 +56,8 @@
             <div class="card-body">
                 <h3 class="card-title">Transaksi Order Detail</h3>
                 <form action="{{route('trans.update', $details->id)}}" method="post" id="paymentForm" data-order-id="{{$details->id}}">
+                    @csrf
+                    @method('PUT')
                     <table class="table table-bordered">
                     <thead>
                         <tr>
