@@ -13,6 +13,7 @@
 </head>
 
 <body>
+@include('sweetalert::alert')
 
   <!-- ======= Header ======= -->
 @include('inc.header');
@@ -48,6 +49,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 @include('inc.js');
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
 <script>
     const button = document.querySelector('.addRow');
@@ -57,15 +59,12 @@
     const grandTotal = document.getElementById('grandTotal');
     const grandTotalInput = document.getElementById('grandTotalInput');
 
-    const orderPay = document.getElementById('order_pay');
-    const orderChange = document.getElementById('order_change');
-    const orderChangeDisplay = document.getElementById('order_change_display');
-    const totalInput = document.getElementById('totalInput');
+
 
 
     let no = 1;
 
-    orderPay.addEventListener('input', updateOrderChange);
+
 
     button.addEventListener('click', function () {
         const selectedProduct = select.options[select.selectedIndex];
@@ -146,6 +145,17 @@
         grandTotalInput.value = grand;
     }
 
+
+
+
+</script>
+
+<script>
+    const orderPay = document.getElementById('order_pay');
+    const orderChange = document.getElementById('order_change');
+    const orderChangeDisplay = document.getElementById('order_change_display');
+    const totalInput = document.getElementById('totalInput');
+
     function updateOrderChange(){
         // kembali = bayar - total
         const pay = parseInt(orderPay.value) || 0;
@@ -159,7 +169,7 @@
         orderChange.value = change
     }
 
-
+    orderPay.addEventListener('input', updateOrderChange);
 </script>
 
 <script type="text/javascript"

@@ -42,6 +42,7 @@
 <body>
 
   <main>
+    @include('sweetalert::alert')
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -64,15 +65,26 @@
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
-
+                  @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                  @endif
                   <form method="post" action="{{route('actionLogin')}}" class="row g-3 needs-validation" novalidate>
                     @csrf
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" id="yourEmail" required>
+                        <input type="email" name="email" class="form-control" id="yourEmail" required value="{{old('email')}}">
                         <div class="invalid-feedback">Please enter your email</div>
+                        @error('email')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
                       </div>
                     </div>
 
@@ -80,6 +92,9 @@
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
+                      @error('password')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
                     </div>
 
                     <div class="col-12">

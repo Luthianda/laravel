@@ -33,6 +33,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'phone' => ['required', new UniqueOrg]
+        ]);
+
         Customers::create($request->all());
         return redirect()->to('customer')->with('success', 'Data berhasil ditambah');
     }

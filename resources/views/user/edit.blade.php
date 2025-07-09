@@ -9,7 +9,7 @@
                     @csrf
                     @method('PUT')
                     <label for="" class="form-lable">Nama</label>
-                    <input type="text" class="form-control" name="customer_name" value="{{$edit->name}}" required>
+                    <input type="text" class="form-control" name="name" value="{{$edit->name}}" required>
 
                     <label for="" class="form-lable">Email</label>
                     <input type="email" class="form-control" name="email" value="{{$edit->email}}" required>

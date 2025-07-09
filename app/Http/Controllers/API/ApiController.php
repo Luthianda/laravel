@@ -5,11 +5,39 @@ namespace App\Http\Controllers\API;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    public function loginAction(Request $request)
+    {
+        $credential = $request->only('email', 'password');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:5',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+        }
+        if (!Auth::attempt($credential)) {
+            return response()->json(['status' => 'error', 'message' => 'Invalid credentials'], 401);
+        }
+
+        // generate token pakai sanctum atau jwt
+        // token diambil dari auth()->user();, atau v
+        $user = Auth::user();
+        $token = $user->createToken('api_token')->plainTextToken;
+        return response()->json(['status' => 'success', 'user' => $user, 'token' => $token]);
+    }
+
+    public function me()
+    {
+        return response()->json(['status' => 'success', 'data' => Auth::user()]);
+    }
+
     public function getUsers()
     {
         $users = User::get();
