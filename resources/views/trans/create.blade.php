@@ -56,7 +56,7 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    
+
                     <div class="mb-3">
                         <p><strong>Grand Total: Rp. <span id="grandTotal">0</span></strong></p>
                         <input type="hidden" name="grand_total" id="grandTotalInput" value="0">
