@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class CustomerController extends Controller
@@ -33,12 +34,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $dataValidated = $request->validate([
             'name' => 'required',
-            'phone' => ['required', new UniqueOrg]
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string'
         ]);
 
-        Customers::create($request->all());
+        Customers::create($dataValidated);
+        Alert::success('Mantap!', 'Data berhasil ditambah');
         return redirect()->to('customer')->with('success', 'Data berhasil ditambah');
     }
 
@@ -70,12 +73,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $customer = Customers::find($id);
-        $customer->customer_name = $request->customer_name;
-        $customer->price = $request->price;
-        $customer->description = $request->description;
-        $customer->save();
-        return redirect()->to('customer')->with('success', 'Data berhasil diubah');
+        $dataValidated = $request->validate([
+            'name' => 'required|string',
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string'
+        ]);
+
+        $customer = Customers::findOrfail($id);
+        $customer->update($dataValidated);
+        Alert::success('Sukses!', 'Data berhasil diubah');
+        return redirect()->to('customer')->with('Sukses!', 'Data berhasil diubah');
     }
 
     /**
@@ -83,8 +90,9 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        $customer = Customers::find($id);
+        $customer = Customers::findOrFail($id);
         $customer->delete();
-        return redirect()->to('customer')->with('success', 'Data berhasil dihapus');
+        toast('Data berhasil dihapus', 'Sukses!');
+        return redirect()->to('customer')->with('Sukses!', 'Data berhasil dihapus');
     }
 }

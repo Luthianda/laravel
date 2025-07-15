@@ -23,14 +23,13 @@
                         <td><a href="{{route('trans.show', $data->id)}}">{{$data->order_code}}</a></td>
                         <td>{{$data->customer->name}}</td>
                         <td>{{$data->order_end_date}}</td>
-                        <td>{{$data->status_text}}</td>
+                        <td class="{{ $data->order_status == 0 ? 'text-info' : 'text-success' }}">{{ $data->status_text }}</td>
                         <td>
                             <a href="{{route('print_struk', $data->id)}}" class="btn btn-success btn-sm">Cetak</a>
-                            <a href="{{route('trans.show', $data->id)}}" class="btn btn-warning btn-sm">Ubah</a>
                             <form action="{{route('trans.destroy', $data->id)}}" method="post" style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="sumbit" onclick="return confirm('yakin beud nich pen apus??')" class="btn btn-danger btn-sm">Hapus</button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmAndDelete({{ $data->id }})">Hapus</button>
                             </form>
                         </td>
                     </tr>

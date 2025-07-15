@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id_level',
         'name',
         'email',
         'password',
@@ -45,5 +46,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Levels::class, 'id_level', 'id');
     }
 }

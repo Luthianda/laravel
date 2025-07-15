@@ -15,7 +15,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{url('service')}}">
+            <a href="{{route('service.index')}}">
               <i class="bi bi-circle"></i><span>Servis</span>
             </a>
           </li>
@@ -38,17 +38,18 @@
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-cash-coin"></i><span>Transaksi</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="{{ route('report.index') }}">
+          <i class="bi bi-book"></i>
+          <span>Report</span>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{route('trans.index')}}">
-              <i class="bi bi-circle"></i><span>Trans Order</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('trans.index') }}">
+          <i class="bi bi-cash"></i>
+          <span>Transaksi</span>
+        </a>
+      </li>
 
     </ul>
 

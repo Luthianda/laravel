@@ -11,7 +11,6 @@ class TransDetails extends Model
         'id_service',
         'qty',
         'subtotal',
-        'note'
     ];
 
     public function transOrder()

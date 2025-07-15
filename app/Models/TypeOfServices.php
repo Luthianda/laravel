@@ -13,4 +13,8 @@ class TypeOfServices extends Model
     // protected $table ='';
     // lalu baru masukkan table yang tidak memakai s tsb dan baru jalankan di terminal.
     // contoh: table 'type_of_service', cara menjalankannya 'php artisan db:seed --class=TypeOfServicesClass'
+    public function detail()
+    {
+        return $this->hasOne(TransDetails::class, 'id_service');
+    }
 }

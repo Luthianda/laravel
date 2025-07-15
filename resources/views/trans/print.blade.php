@@ -65,7 +65,7 @@
     <div class="struk">
         <div class="struk-header">
             <h3>Londri</h3>
-            <h2>Cuci-Mencuci kuy!</h2>
+            <h2>Tempat Cuci-Mencuci dengan Harga Ekonomis</h2>
 
             <div class="info text-center">
                 Jl. Tenabang, Jakarta Pusat
@@ -81,15 +81,12 @@
                 <span>9:40</span>
             </div>
             <div class="row">
-                <span>Cashier</span>
+                <span>Kasir</span>
                 <span>{{auth()->user()->name}}</span>
             </div>
             <div class="row">
-                <span>Order Id</span>
+                <span>Id Pesanan</span>
                 <span>{{$details->order_code ?? ''}}</span>
-            </div>
-            <div class="row">
-                <span>"Terserah jodoh orang mana saja, yang penting jangan jodoh orang diembat, PAHAM!!"</span>
             </div>
         </div>
         <div class="line"></div>
@@ -98,7 +95,7 @@
             <div class="item">
                 <strong>{{$detail->service->service_name}}</strong>
                 <div class="item-qty">
-                    <span>{{$detail->qty}}x @ {{number_format($detail->service->price)}}</span>
+                    <span>{{$detail->qty}} kg x Rp {{number_format($detail->service->price)}}</span>
                     <span>{{$detail->subtotal}}</span>
                 </div>
             </div>
@@ -108,13 +105,13 @@
         <div class="line"></div>
         <div class="summary">
             <div class="row">
-                <span>Subtotal</span>
+                <span>Total</span>
                 <span>Rp {{number_format($details->total)}}</span>
             </div>
         </div>
         <div class="line">
             <footer class="text-center">
-                Tencu dah nyuci disini eaaaa
+                Terimakasih sudah mencuci disini!
             </footer>
         </div>
         <script>
